@@ -43,6 +43,7 @@ body {
         background-color: white;
         padding: 20px;
         margin-top: 20px;
+        overflow: hidden;
 }
 
 /* Clear floats after the columns */
