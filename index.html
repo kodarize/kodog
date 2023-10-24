@@ -16,6 +16,29 @@
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
+      <h2>Multiple Vulnerabilities in Cisco IOS XE Software Web UI Feature</h2>
+      <h5>Cisco's IOS XE Software Web UI has been exploited (10/10 Critical), Oct 23, 2023</h5>
+      <p>Many are considering any Cisco IOS XE device with it's web interface exposed to the public internet to be compromised and replaced. Here is the HTTP POST code being used:</p>
+      <img src="https://blog.talosintelligence.com/content/images/2023/10/data-src-image-a4c125f3-cbfc-4a3d-a1f0-1e140c1039c9.png" alt="Meteor Lake">
+      <p>The implant is based on the Lua programming language and consists of 29 lines of code that facilitates the arbitrary command execution. The attacker must create an HTTP POST request to the device, which delivers the following three functions (Figure 1):</p>
+      <ul>
+        <li>The first function is dictated by the “menu” parameter, which must exist and must be non-empty. This returns a string of numbers surrounded by forward-slashes, which we believe represents the implant’s version. </li>
+        <li>The second function is dictated by the “logon_hash” parameter, which must be set to “1”. This returns an 18-character hexadecimal string that is hardcoded into the implant.</li>
+        <li>The third function is also dictated by the “logon_hash” parameter, which checks to see if the parameter matches a 40-character hexadecimal string that is hardcoded into the implant. A second parameter used here is “common_type”, which must be non-empty, and whose value determines whether the code is executed at the system level or IOS level. If the code is executed at the system level, this parameter must be set to “subsystem”, and if it is executed at the IOS level, the parameter must be “iox”. The IOX commands are executed at privilege level 15.</li>
+      </ul>
+      <p>In most instances we have observed of this implant being installed, both the 18-character hexadecimal string in the second function and the 40-character hexadecimal string in the third function are unique, although in some cases, these strings were the same across different devices. This suggests there is a way for the actor to compute the value used in the third function from the value returned by the second function, acting as a form of authentication required for the arbitrary command execution provided in the third function.</p>
+      <p>We have also observed a second version of the implant, which now includes a preliminary check for the HTTP Authorization header.  Most of the core functionalities of this version remain the same as the previous version (Figure 2). The second version likely started to be deployed as early as October 20, and was deployed using the earlier version of the implant.</p>
+      <iframe max-width="100%" height="auto" src="https://www.youtube.com/embed/UUfleINskwo?si=IOgTRR7BH8_1iqGY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe max-width="100%" height="auto" src="https://www.youtube.com/embed/l1khQ3-9Xc4?si=fvDso9MveWP14dNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <h3>References</h3>
+      <p>For more information, or to see where this information is coming from check out these articles and videos:</p>
+      <p>Cisco IOS XE. (n.d.). Cisco. Retrieved October 22, 2023, from <a href="https://www.cisco.com/c/en/us/products/ios-nx-os-software/ios-xe/index.html" target="_blank">https://www.cisco.com/c/en/us/products/ios-nx-os-software/ios-xe/index.html</a>
+        Cisco Security Advisory: Multiple Vulnerabilities in Cisco IOS XE Software Web UI Feature. (n.d.). Cisco. Retrieved October 22, 2023, from <a href="https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-iosxe-webui-privesc-j22SaA4z" target="_blank">https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-iosxe-webui-privesc-j22SaA4z</a>
+        Cisco Talos. (2023, October 16). Active exploitation of Cisco IOS XE Software Web Management User Interface vulnerabilities. Cisco Talos Blog. <a href="https://blog.talosintelligence.com/active-exploitation-of-cisco-ios-xe-software" target="_blank">https://blog.talosintelligence.com/active-exploitation-of-cisco-ios-xe-software</a>
+        Hak5. (2023, October 18). Cisco Zero-Day Exploited In The Wild - ThreatWire. <a href="https://www.youtube.com/watch?v=UUfleINskwo" target="_blank">https://www.youtube.com/watch?v=UUfleINskwo</a>
+        Mental Outlaw. (2023, October 19). This Is Why You Don’t Outsource Your Network Security. <a href="https://www.youtube.com/watch?v=l1khQ3-9Xc4" target="_blank">https://www.youtube.com/watch?v=l1khQ3-9Xc4</a></p>
+    </div>
+    <div class="card">
       <h2>Meteor Lake: Tiles, Cores, and Nodes (REVISITED)</h2>
       <h5>New Intel Chip & Chip Making Process, Oct 16, 2023</h5>
       <img src="https://duet-cdn.vox-cdn.com/thumbor/0x0:1937x980/1440x729/filters:focal(969x490:970x491):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/24933955/mtl.jpg" alt="Meteor Lake">
